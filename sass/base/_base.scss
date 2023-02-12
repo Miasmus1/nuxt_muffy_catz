@@ -1,0 +1,36 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  height: 100vh;
+  background: $background-color-html;
+  background-attachment: fixed;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  color: $color-text-primary;
+  padding: 2rem 0;
+  box-sizing: border-box;
+}
+
+.link-button {
+  text-decoration: none;
+  color: $white-shade-1;
+
+  &:hover {
+    color: $color-text-primary;
+    
+  } 
+}

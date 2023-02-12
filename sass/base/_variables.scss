@@ -1,0 +1,42 @@
+/**** TYPOGRAPHY ****/
+$color-text-primary: #fff;
+
+/**** BORDER RADIUSES ****/
+$border-radius-md: 8px;
+
+/**** COLORS *****/
+
+/** black**/
+$black-pure: #000;
+$black-shade-1: #111;
+$black-shade-2: #222;
+$black-shade-3: #333;
+
+/** white **/
+$white-shade-1: #ddd;
+
+/**** BACKGROUND COLORS ****/
+$background-color-html: linear-gradient(to right top, #222, #111);
+
+/**** RESPONSIVE MANAGER ****/
+
+/* 1em = 16px */
+@mixin responsive($breakpoint) {
+  @if $breakpoint == tablet-landscape {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } // < 1200px
+  }
+
+  @if $breakpoint == mobile {
+    @media only screen and (max-width: 48em) {
+      @content;
+    } // < 768px
+  }
+
+  @if $breakpoint == mobile-xs {
+    @media only screen and (max-width: 20.3125em) {
+      @content;
+    } // < 325px
+  }
+}

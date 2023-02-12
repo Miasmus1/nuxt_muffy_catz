@@ -1,0 +1,3 @@
+<template>
+  <CatContent></CatContent>
+</template>
