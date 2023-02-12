@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <a href="https://github.com/Miasmus1/weather-app-public" target="_blank">
+    <a href="https://github.com/Miasmus1/nuxt_muffy_catz" target="_blank">
       <svg role="img">
         <use href="@/assets/sprites.svg#github" />
       </svg>
@@ -8,21 +8,8 @@
     </a>
 
     <ul>
-      <li v-if="currentPath === '/'">
-        <NuxtLink 
-          to="/" 
-          class="link-button"
-        >
-          Login
-        </NuxtLink>
-      </li>
-
-      <li v-else>
-        <NuxtLink 
-          to="/" 
-          class="link-button"
-          @click="handleLogout" 
-        >
+      <li v-if="currentPath !== '/'">
+        <NuxtLink to="/" class="link-button" @click="handleLogout">
           Logout
         </NuxtLink>
       </li>
@@ -34,9 +21,13 @@
 const route = useRoute();
 const currentPath = ref('/');
 
-watch(route, value => {
-  currentPath.value = value.path
-}, {deep: true, immediate: true})
+watch(
+  route,
+  (value) => {
+    currentPath.value = value.path;
+  },
+  { deep: true, immediate: true }
+);
 
 function handleLogout() {
   const cookie = useCookie('userInfo', {});
@@ -59,8 +50,8 @@ nav {
     justify-content: space-between;
     text-decoration: none;
     color: $white-shade-1;
-    font-weight: 500;
-    font-size: 2.4rem;
+    font-weight: bold;
+    font-size: 2rem;
     line-height: 1;
 
     & svg {
@@ -80,11 +71,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     list-style: none;
-
-    & li:hover {
-      filter: contrast(2);
-      cursor: pointer;
-    }
+    font-weight: bold;
   }
 }
 </style>

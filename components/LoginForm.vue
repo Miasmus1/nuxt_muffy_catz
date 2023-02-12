@@ -14,7 +14,7 @@
         type="email"
         placeholder="Enter your e-mail"
         required
-      >
+      />
 
       <label for="password">Password</label>
       <input
@@ -24,7 +24,7 @@
         placeholder="Enter your password"
         minlength="6"
         required
-      >
+      />
 
       <button>Log In</button>
     </form>

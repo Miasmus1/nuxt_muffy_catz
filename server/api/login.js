@@ -4,8 +4,6 @@ export default defineEventHandler(async (event) => {
 
   const { firebaseApiKey } = config;
 
-  console.log(body);
-
   const response = await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${firebaseApiKey}`,
     {
@@ -26,6 +24,11 @@ export default defineEventHandler(async (event) => {
   }
 
   const responseData = await response.json();
-  setCookie(event, 'userInfo', JSON.stringify({ idToken: responseData.idToken }), { maxAge: responseData.expiresIn });
+  setCookie(
+    event,
+    'userInfo',
+    JSON.stringify({ idToken: responseData.idToken }),
+    { maxAge: responseData.expiresIn }
+  );
   return response.ok;
 });

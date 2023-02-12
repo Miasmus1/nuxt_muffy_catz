@@ -1,35 +1,41 @@
 <template>
   <div>
-    <transition 
-      v-if="catPic" 
-      name="fade-img" 
-      mode="out-in"
-    >
+    <transition v-if="catPic" name="fade-img" mode="out-in">
       <img
         :key="catPic"
         :src="catPic"
         alt="A Funny Cat Photo"
-      >
+        @load="handleLoad"
+      />
     </transition>
-    <div 
-      v-else 
-      class="loading-spinner"
-    >
+    <div v-else class="loading-spinner">
       <div id="loading" />
     </div>
-    <button @click="getCat">Get New Cat</button>
+    <button :disabled="imageLoading" @click="getCat">Get New Cat</button>
   </div>
 </template>
 
 <script setup>
 const nuxtApp = useNuxtApp();
 const catPic = ref('');
+const imageLoading = ref(true);
+
+function handleLoad() {
+  imageLoading.value = false;
+}
 
 onMounted(() => {
   getCat();
 });
 
 async function getCat() {
+  imageLoading.value = true;
+  const cookie = useCookie('userInfo', {});
+
+  if (!cookie.value?.idToken) {
+    navigateTo('/');
+  }
+
   catPic.value = await nuxtApp.$repositories.cat.show();
 }
 </script>
@@ -44,11 +50,16 @@ div {
   gap: 5rem;
 
   & > img {
-    width: 30rem;
-    height: 30rem;
+    width: 40rem;
+    height: 40rem;
     object-fit: cover;
     border-radius: $border-radius-md;
     box-shadow: 0 0 1rem 2rem rgba(0, 0, 0, 0.2);
+
+    @include responsive('mobile') {
+      width: 30rem;
+      height: 30rem;
+    }
   }
 
   & > button {
@@ -74,8 +85,8 @@ div {
 }
 
 .loading-spinner {
-  width: 30rem;
-  height: 30rem;
+  width: 40rem;
+  height: 40rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,6 +113,11 @@ div {
       -webkit-transform: rotate(360deg);
     }
   }
+
+  @include responsive('mobile') {
+    width: 30rem;
+    height: 30rem;
+  }
 }
 
 .fade-img-enter-from,
@@ -109,13 +125,13 @@ div {
   opacity: 0;
 }
 .fade-img-enter-active {
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.75s ease-out;
 }
 .fade-img-enter-to,
 .fade-img-leave-from {
   opacity: 1;
 }
 .fade-img-leave-active {
-  transition: opacity 0.5s ease-in;
+  transition: opacity 0.75s ease-in;
 }
 </style>

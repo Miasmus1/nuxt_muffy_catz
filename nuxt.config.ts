@@ -4,12 +4,12 @@ export default defineNuxtConfig({
     catApiKey: process.env.CAT_API_KEY,
     firebaseApiKey: process.env.FIREBASE_API_KEY,
   },
-  css: ['@/sass/main.scss'],
+  css: ['@/assets/sass/main.scss'],
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/sass/base/_variables.scss";',
+          additionalData: '@import "@/assets/sass/base/_variables.scss";',
         },
       },
     },
